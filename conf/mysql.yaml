@@ -1,0 +1,14 @@
+---
+list:
+  default:
+    driver_name: mysql
+    data_source_name: xxxxx:xxxxxxxx123@tcp(10.177.40.250:9306)/alert?charset=utf8mb4&parseTime=true
+    max_open_conn:  200
+    max_idle_conn:  100
+    max_conn_life_time: 5000
+  pro:
+    driver_name: mysql
+    data_source_name: xxxxx:xxxxxxxx123@tcp(mysql-cluster-mysql-master.mysql:3306)/alert?charset=utf8mb4&parseTime=true
+    max_open_conn:  20
+    max_idle_conn:  10
+    max_conn_life_time: 500

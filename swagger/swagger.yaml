@@ -1,0 +1,2183 @@
+consumes:
+    - application/json
+definitions:
+    AlarmPolicyType:
+        type: string
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    AlertInfo:
+        properties:
+            AlertId:
+                description: 告警id, 也是Fingerprint
+                type: string
+            Az:
+                description: 所属可用区
+                type: string
+            CurrentValue:
+                description: 当前值
+                type: string
+            Duration:
+                description: 告警持续时间
+                type: string
+            EndsAt:
+                description: 结束时间
+                format: int64
+                type: integer
+            Expression:
+                description: 告警规则
+                type: string
+            Handler:
+                description: 处理人
+                type: string
+            Id:
+                format: int64
+                type: integer
+            Level:
+                description: 告警级别
+                type: string
+            Name:
+                description: 告警名称
+                type: string
+            PolicyName:
+                description: 策略名称
+                type: string
+            Region:
+                description: 所属区域
+                type: string
+            Resource:
+                description: 告警实例
+                type: string
+            ResourceSubType:
+                description: 资源子类型
+                type: string
+            ResourceType:
+                description: 资源类型
+                type: string
+            StartsAt:
+                description: 开始时间
+                format: int64
+                type: integer
+            Status:
+                description: 告警状态
+                type: string
+            Threshold:
+                description: 阈值
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    AlertRule:
+        properties:
+            Algo:
+                description: 统计方式
+                type: string
+            AlgoDisplayName:
+                description: 统计方式显示名
+                type: string
+            DisplayName:
+                description: 监控项显示名，中文名称, e.g. cpu使用率
+                type: string
+            ExpressionWithChinese:
+                description: 中文表达式
+                type: string
+            For:
+                description: 持续时间
+                type: string
+            GroupWaitTime:
+                description: 等待时间
+                type: string
+            Interval:
+                description: 告警间隔
+                type: string
+            Labels:
+                additionalProperties:
+                    type: string
+                description: 自定义标签
+                type: object
+            Level:
+                description: 告警等级
+                type: string
+            MonitorName:
+                description: 监控项名称，英文名称，e.g. cpu_use_percent
+                type: string
+            Name:
+                description: 告警显示名称
+                type: string
+            Operator:
+                description: 运算操作符
+                type: string
+            PromqlTpl:
+                $ref: '#/definitions/PromqlTemplate'
+            RuleId:
+                description: 告警规则唯一id
+                type: string
+            Threshold:
+                description: 阈值
+                format: double
+                type: number
+            Unit:
+                description: 告警策略的单位
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    BaseInfo:
+        properties:
+            Info:
+                $ref: '#/definitions/Info'
+            Values:
+                description: 前端页面需要的值
+                items:
+                    $ref: '#/definitions/Value'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    BaseUserInfo:
+        properties:
+            Email:
+                description: 用户邮箱
+                type: string
+            Telephone:
+                description: 用户电话
+                type: string
+            UserId:
+                description: 用户id
+                type: string
+            Username:
+                description: 用户名称
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    Contacts:
+        description: Contacts 联系人组
+        properties:
+            EnableEmail:
+                description: 是否发送邮件
+                type: boolean
+            EnableSms:
+                description: 是否发送短信
+                type: boolean
+            Id:
+                description: 联系人组id
+                format: int64
+                type: integer
+            Index:
+                description: 用于标识创建顺序
+                format: int64
+                type: integer
+            Name:
+                description: 联系人组名称
+                type: string
+            Users:
+                description: 联系人组中的用户
+                items:
+                    $ref: '#/definitions/User'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    ContactsInfo:
+        properties:
+            CreatedAt:
+                format: int64
+                type: integer
+            Id:
+                format: int64
+                type: integer
+            Name:
+                type: string
+            UpdatedAt:
+                format: int64
+                type: integer
+            Users:
+                items:
+                    $ref: '#/definitions/User'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    CreateContactRequest:
+        description: CreateContactRequest 创建联系人组的请求数据
+        properties:
+            Name:
+                description: 联系人组的名称
+                type: string
+            Users:
+                description: 添加到联系人组的用户列表
+                items:
+                    $ref: '#/definitions/BaseUserInfo'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    CreateContactResponse:
+        description: CreateContactResponse 创建联系人组的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    CreateDingTalkConfigResponse:
+        description: CreateDingTalkConfigResponse 创建钉钉配置列表的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    CreateDingtalkConfigRequest:
+        description: CreateDingtalkConfigRequest 创建钉钉配置列表的请求数据结构
+        properties:
+            Name:
+                description: 机器人名称
+                type: string
+            Url:
+                description: 机器人webhoook地址
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    CreatePolicyRequest:
+        description: CreatePolicyRequest 创建告警策略的请求数据结构
+        properties:
+            Comment:
+                description: 策略描述
+                type: string
+            Creator:
+                description: 告警策略的创建人
+                type: string
+            FormPolicy:
+                $ref: '#/definitions/FormPolicy'
+            Labels:
+                additionalProperties:
+                    type: string
+                description: 策略标签
+                type: object
+            Limit:
+                description: 每条告警规则的最大告警次数
+                format: int64
+                type: integer
+            Name:
+                description: 告警策略名称
+                type: string
+            NotifySetup:
+                $ref: '#/definitions/NotifySetup'
+            Production:
+                description: 业务线名称
+                type: string
+            PromqlPolicy:
+                $ref: '#/definitions/PromqlPolicy'
+            Receivers:
+                $ref: '#/definitions/Receivers'
+            Type:
+                $ref: '#/definitions/AlarmPolicyType'
+            Updater:
+                description: 告警策略的最后修改人
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    CreatePolicyResponse:
+        description: CreatePolicyResponse 创建告警策略的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    DeleteContactRequest:
+        description: DeleteContactRequest 删除联系人组的请求数据结构
+        properties:
+            Id:
+                description: 要删除的联系人组的id
+                format: int64
+                type: integer
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    DeleteContactResponse:
+        description: DeleteContactResponse 删除联系人组的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    DeleteDingTalkConfigResponse:
+        description: DeleteDingTalkConfigResponse 删除钉钉配置列表的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    DeleteDingtalkConfigRequest:
+        description: DeleteDingtalkConfigRequest 删除钉钉配置列表的请求数据结构
+        properties:
+            Id:
+                description: 配置id
+                format: int64
+                type: integer
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    DeletePolicyRequest:
+        description: DeletePolicyRequest 删除告警策略的请求数据结构
+        properties:
+            InstanceIds:
+                items:
+                    type: string
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    DeletePolicyResponse:
+        description: DeletePolicyResponse 删除告警策略的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    DingtalkConfig:
+        description: DingtalkConfig 钉钉配置
+        properties:
+            Id:
+                format: int64
+                type: integer
+            Name:
+                description: 机器人名称
+                type: string
+            Url:
+                description: 机器人webhoook地址
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    DingtalkConfigList:
+        properties:
+            Items:
+                items:
+                    $ref: '#/definitions/DingtalkConfig'
+                type: array
+            Total:
+                format: int64
+                type: integer
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    ErrResponse:
+        description: ErrResponse 错误响应
+        properties:
+            Code:
+                example: 1001
+                format: int64
+                type: integer
+            Data:
+                example: {}
+                type: object
+            Message:
+                example: 失败
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    FormPolicy:
+        description: FormPolicy 表单告警策略
+        properties:
+            ResourceSubType:
+                description: 资源子类型
+                type: string
+            ResourceSubTypeName:
+                description: 资源子类型的中文名称
+                type: string
+            ResourceType:
+                description: 资源类型
+                type: string
+            ResourceTypeName:
+                description: 资源类型的中文名称
+                type: string
+            Resources:
+                $ref: '#/definitions/Resources'
+            Rules:
+                description: 告警规则详情
+                items:
+                    $ref: '#/definitions/AlertRule'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    GetFeishuConfigResponse:
+        description: GetFeishuConfigResponse 获取飞书配置的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/GetFeishuConfigResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetFeishuConfigResponseData:
+        properties:
+            Url:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetMailboxConfigResponse:
+        description: GetMailboxConfigResponse 获取邮箱配置的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/GetMailboxConfigResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetMailboxConfigResponseData:
+        properties:
+            DisplayName:
+                type: string
+            Port:
+                format: int64
+                type: integer
+            SSL:
+                type: boolean
+            SmtpServer:
+                type: string
+                x-go-name: SMTPServer
+            Template:
+                description: Password    string `json:"Password"` // 不返回密码
+                type: string
+            Username:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetPolicyResponse:
+        description: GetPolicyResponse 获取告警策略详情的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/GetPolicyResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetPolicyResponseData:
+        properties:
+            Comment:
+                description: 策略描述
+                type: string
+            CreatedAt:
+                format: int64
+                type: integer
+            Creator:
+                description: 告警策略的创建人
+                type: string
+            Enabled:
+                description: 是否启用告警策略，true-启用，false-不启用
+                type: boolean
+            FormPolicy:
+                $ref: '#/definitions/FormPolicy'
+            Id:
+                format: int64
+                type: integer
+            InstanceId:
+                description: 实例id
+                type: string
+            Labels:
+                additionalProperties:
+                    type: string
+                description: 策略标签
+                type: object
+            Limit:
+                description: 每条告警规则的最大告警次数
+                format: int64
+                type: integer
+            Name:
+                description: 告警策略名称
+                type: string
+            NotifySetup:
+                $ref: '#/definitions/NotifySetup'
+            Production:
+                description: 业务线名称
+                type: string
+            PromqlPolicy:
+                $ref: '#/definitions/PromqlPolicy'
+            Receivers:
+                $ref: '#/definitions/Receivers'
+            Type:
+                $ref: '#/definitions/AlarmPolicyType'
+            UpdatedAt:
+                format: int64
+                type: integer
+            Updater:
+                description: 告警策略的最后修改人
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetSMSConfigResponse:
+        description: GetSMSConfigResponse 获取短信配置的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/GetSMSConfigResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetSMSConfigResponseData:
+        properties:
+            AK:
+                type: string
+            Ip:
+                type: string
+                x-go-name: IP
+            Protocol:
+                type: string
+            SK:
+                type: string
+            Sign:
+                type: string
+            Template:
+                type: string
+            Url:
+                type: string
+                x-go-name: URL
+            User:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetWechatConfigResponse:
+        description: GetWechatConfigResponse 获取企业微信配置的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/GetWechatConfigResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    GetWechatConfigResponseData:
+        properties:
+            AppId:
+                type: string
+            AppSecret:
+                type: string
+            CompanyId:
+                type: string
+            Template:
+                type: string
+            ToParty:
+                items:
+                    type: string
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    Info:
+        properties:
+            Name:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListAlertsRequest:
+        description: ListAlertsRequest 获取告警列表的请求数据结构
+        properties:
+            Az:
+                description: 所属可用区, all-所有可用区
+                items:
+                    type: string
+                type: array
+            Duration:
+                description: |-
+                    持续时间
+                    lessThanTenMin - 小于10分钟
+                    tenMinToOneHour - 10分钟到1小时
+                    oneHourToOneDay - 1小时到24小时
+                    moreThanOneDay - 大于24小时
+                items:
+                    type: string
+                type: array
+            Level:
+                description: 告警级别
+                items:
+                    type: string
+                type: array
+            OrderBy:
+                description: 按某个字段排序, start-按开始时间排序, end-按结束时间排序
+                type: string
+            OrderCode:
+                description: 排序码, asce-升序, desc-降序
+                type: string
+            PageNo:
+                description: 当前页码，从1开始
+                format: int64
+                type: integer
+            PageSize:
+                description: 每页数据个数，默认10个, 当值为-1时不分页
+                format: int64
+                type: integer
+            Region:
+                description: 所属区域 all-所有区域
+                type: string
+            ResourceSubType:
+                description: 资源子类型
+                items:
+                    type: string
+                type: array
+            ResourceType:
+                description: 资源类型
+                items:
+                    type: string
+                type: array
+            SearchKey:
+                description: 模糊搜索, name-告警名称，policy_name-策略名称，resource-告警实例
+                type: string
+            SearchValue:
+                type: string
+            Status:
+                description: 告警状态，firing 或 resolved
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListAlertsResponse:
+        description: ListAlertsResponse 获取告警列表的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/ListAlertsResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListAlertsResponseData:
+        properties:
+            Items:
+                items:
+                    $ref: '#/definitions/AlertInfo'
+                type: array
+            Total:
+                format: int64
+                type: integer
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListContactRequest:
+        description: ListContactRequest 获取联系人组列表的请求数据结构
+        properties:
+            PageNo:
+                description: 当前页码，从1开始
+                format: int64
+                type: integer
+            PageSize:
+                description: 每页数据个数，默认10个, 当值为-1时不分页
+                format: int64
+                type: integer
+            SearchKey:
+                description: 模糊搜索的key，允许值：name
+                type: string
+            SearchValue:
+                description: 模糊搜索的value
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    ListContactResponse:
+        description: ListContactResponse 获取联系人组列表的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/ListContactResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    ListContactResponseData:
+        properties:
+            Items:
+                items:
+                    $ref: '#/definitions/ContactsInfo'
+                type: array
+            Total:
+                format: int64
+                type: integer
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    ListDingTalkConfigResponse:
+        description: ListDingTalkConfigResponse 获取钉钉配置列表的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/DingtalkConfigList'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListDingtalkConfigRequest:
+        description: ListDingtalkConfigRequest 获取钉钉配置列表的请求数据结构
+        properties:
+            PageNo:
+                description: 当前页码，从1开始
+                format: int64
+                type: integer
+            PageSize:
+                description: 每页数据个数，默认10个, 当值为-1时不分页
+                format: int64
+                type: integer
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListPolicyRequest:
+        description: ListPolicyRequest 获取告警策略列表的请求数据结构
+        properties:
+            PageNo:
+                description: 当前页码，从1开始
+                format: int64
+                type: integer
+            PageSize:
+                description: 每页数据个数，默认10个, 当值为-1时不分页
+                format: int64
+                type: integer
+            ResourceSubType:
+                description: 资源子类型
+                items:
+                    type: string
+                type: array
+            ResourceType:
+                description: 资源类型
+                items:
+                    type: string
+                type: array
+            SearchKey:
+                description: '模糊搜索的key，允许值: name-策略名称 creator-创建者 production-业务线 resource-关联的实例'
+                type: string
+            SearchValue:
+                type: string
+            Type:
+                $ref: '#/definitions/AlarmPolicyType'
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListPolicyResponse:
+        description: ListPolicyResponse 获取告警策略列表的响应数据
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/ListPolicyResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListPolicyResponseData:
+        properties:
+            Items:
+                items:
+                    $ref: '#/definitions/PolicyInfo'
+                type: array
+            Total:
+                format: int64
+                type: integer
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListPromqlTplResponse:
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/ListPromqlTplResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    ListPromqlTplResponseData:
+        properties:
+            Items:
+                items:
+                    $ref: '#/definitions/TplInfo'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    NoticeUser:
+        description: NoticeUser 联系人
+        properties:
+            Email:
+                description: 邮箱
+                type: string
+            Index:
+                description: 用于标识创建顺序
+                format: int64
+                type: integer
+            SendEmail:
+                description: 是否发送邮件
+                type: boolean
+                x-go-name: EnableEmail
+            SendSms:
+                description: 是否发送短信
+                type: boolean
+                x-go-name: EnableSms
+            Telephone:
+                description: 电话
+                type: string
+            UserId:
+                description: 用户id
+                type: string
+            Username:
+                description: 用户名称
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    NotifySetup:
+        description: NotifySetup 通知设置
+        properties:
+            DingtalkRobots:
+                items:
+                    $ref: '#/definitions/DingtalkConfig'
+                type: array
+            EnableDingtalk:
+                description: 是否发送到钉钉机器人
+                type: boolean
+            EnableFeishu:
+                description: 是否发送到飞书
+                type: boolean
+            EnableWecom:
+                description: 是否发送到企业微信
+                type: boolean
+            FeishuGroup:
+                description: 飞书业务群
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    OverviewRequest:
+        description: OverviewRequest 告警总览请求数据结构
+        properties:
+            PageNo:
+                description: 当前页码，从1开始
+                format: int64
+                type: integer
+            PageSize:
+                description: 每页数据个数，默认10个, 当值为-1时不分页
+                format: int64
+                type: integer
+            Region:
+                description: 所属区域
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    OverviewResponse:
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                $ref: '#/definitions/OverviewResponseData'
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    OverviewResponseData:
+        description: OverviewResponseData 告警总览数据
+        properties:
+            ByCloudProduct:
+                description: 按云产品对告警分类
+                items:
+                    $ref: '#/definitions/ResourceTypeAlerts'
+                type: array
+            ByDuration:
+                description: 按持续时间分类
+                items:
+                    $ref: '#/definitions/Value'
+                type: array
+            ByLevel:
+                $ref: '#/definitions/BaseInfo'
+            ByPhysical:
+                description: 按物理资源对告警分类
+                items:
+                    $ref: '#/definitions/ResourceTypeAlerts'
+                type: array
+            ByResource:
+                $ref: '#/definitions/BaseInfo'
+            ByResourcePool:
+                description: 按资源池对告警分类
+                items:
+                    $ref: '#/definitions/ResourceTypeAlerts'
+                type: array
+            ByService:
+                description: 按服务对告警分类
+                items:
+                    $ref: '#/definitions/ResourceTypeAlerts'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    PolicyInfo:
+        properties:
+            Comment:
+                description: 策略描述
+                type: string
+            CreatedAt:
+                format: int64
+                type: integer
+            Creator:
+                description: 告警策略的创建人
+                type: string
+            Enabled:
+                description: 是否启用告警策略，true-启用，false-不启用
+                type: boolean
+            FormPolicy:
+                $ref: '#/definitions/FormPolicy'
+            Id:
+                format: int64
+                type: integer
+            InstanceId:
+                description: 实例id
+                type: string
+            Labels:
+                additionalProperties:
+                    type: string
+                description: 策略标签
+                type: object
+            Limit:
+                description: 每条告警规则的最大告警次数
+                format: int64
+                type: integer
+            Name:
+                description: 告警策略名称
+                type: string
+            NotifySetup:
+                $ref: '#/definitions/NotifySetup'
+            Production:
+                description: 业务线名称
+                type: string
+            PromqlPolicy:
+                $ref: '#/definitions/PromqlPolicy'
+            Receivers:
+                $ref: '#/definitions/Receivers'
+            Type:
+                $ref: '#/definitions/AlarmPolicyType'
+            UpdatedAt:
+                format: int64
+                type: integer
+            Updater:
+                description: 告警策略的最后修改人
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    PromqlPolicy:
+        description: PromqlPolicy 告警策略
+        properties:
+            AlarmCount:
+                description: 告警次数
+                format: int64
+                type: integer
+            ExpressionWithChinese:
+                description: 中文表达式
+                type: string
+            For:
+                description: 持续时间
+                type: string
+            GroupWaitTime:
+                description: 等待时间
+                type: string
+            Interval:
+                description: 告警间隔
+                type: string
+            Level:
+                description: 告警等级
+                type: string
+            Name:
+                description: 告警显示名称
+                type: string
+            Promql:
+                description: prometheus 查询语句
+                type: string
+            RuleId:
+                description: 告警规则id
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    PromqlTemplate:
+        description: PromQL模板
+        properties:
+            Algo:
+                description: 聚合方式、统计方式
+                type: string
+            AlgoDisplayName:
+                description: 统计方式的名称
+                type: string
+            DisplayName:
+                description: 模板显示名称, e.g. CPU使用率
+                type: string
+            Name:
+                description: 模板英文标识
+                type: string
+            Promql:
+                description: PromQL 模板
+                type: string
+            ResourceSubType:
+                description: 资源子类型的英文标识, 根据子类型来查找对应的模板
+                type: string
+            Unit:
+                description: 单位
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    Receivers:
+        properties:
+            ContactsGroup:
+                description: 联系人组
+                items:
+                    $ref: '#/definitions/Contacts'
+                type: array
+            NoticeUsers:
+                description: 联系人
+                items:
+                    $ref: '#/definitions/NoticeUser'
+                type: array
+            SendResolved:
+                description: 是否发送告警恢复通知
+                type: boolean
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    RemoveUserFromContactRequest:
+        description: RemoveUserFromContactRequest 从联系人组中删除用户的请求数据结构
+        properties:
+            Id:
+                format: int64
+                type: integer
+            UserId:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    RemoveUserFromContactResponse:
+        description: RemoveUserFromContactResponse 从联系人组中删除用户的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    Resource:
+        description: Resource 表示被选择的资源(资源结构后续可能会发生变化，暂时按下面结构处理)
+        properties:
+            Az:
+                type: string
+            AzName:
+                type: string
+            Key:
+                type: string
+            Lab:
+                type: string
+            LabName:
+                type: string
+            Name:
+                type: string
+            Region:
+                type: string
+            RegionName:
+                type: string
+            ResourceSubTypeName:
+                type: string
+            ResourceTypeName:
+                type: string
+            Value:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    ResourceTypeAlerts:
+        description: 按服务对告警分类
+        properties:
+            Label:
+                type: string
+            List:
+                items:
+                    $ref: '#/definitions/TileItem'
+                type: array
+            Number:
+                format: int64
+                type: integer
+            Prefix:
+                type: string
+            Unit:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    Resources:
+        properties:
+            Count:
+                description: 选择的资源实例数量
+                format: int64
+                type: integer
+            Index:
+                description: 资源选择方式, 1-按服务树选择, 2-按范围选择, 3-按对象选择
+                format: int64
+                type: integer
+            Instances:
+                description: 资源实例列表
+                items:
+                    $ref: '#/definitions/Resource'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/model
+    SwitchPolicyRequest:
+        description: SwitchPolicyRequest 启动或停止告警策略的请求数据结构
+        properties:
+            Enable:
+                description: 启动或停止告警策略, true-启动 false-停止
+                type: boolean
+            InstanceId:
+                description: 告警策略的实例id
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    SwitchPolicyResponse:
+        description: SwitchPolicyResponse 启动或停止告警策略的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    TileItem:
+        properties:
+            Kind:
+                type: string
+            Label:
+                type: string
+            Number:
+                format: int64
+                type: integer
+            Unit:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    TplInfo:
+        properties:
+            Algo:
+                description: 聚合方式、统计方式
+                type: string
+            AlgoDisplayName:
+                description: 统计方式的名称
+                type: string
+            DisplayName:
+                description: 模板显示名称, e.g. CPU使用率
+                type: string
+            Name:
+                description: 模板英文标识
+                type: string
+            Promql:
+                description: PromQL 模板
+                type: string
+            ResourceSubType:
+                description: 资源子类型的英文标识, 根据子类型来查找对应的模板
+                type: string
+            Unit:
+                description: 单位
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateContactRequest:
+        description: UpdateContactRequest 编辑联系人组的请求数据结构
+        properties:
+            Id:
+                description: 正在编辑的联系人组id
+                format: int64
+                type: integer
+            Name:
+                description: 联系人组名称
+                type: string
+            Users:
+                description: 编辑后要加入联系人组的用户列表
+                items:
+                    $ref: '#/definitions/BaseUserInfo'
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    UpdateContactResponse:
+        description: UpdateContactResponse 编辑联系人组的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    UpdateDingTalkConfigResponse:
+        description: UpdateDingTalkConfigResponse 创建钉钉配置列表的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateDingtalkConfigRequest:
+        description: UpdateDingtalkConfigRequest 创建钉钉配置列表的请求数据结构
+        properties:
+            Id:
+                format: int64
+                type: integer
+            Name:
+                description: 机器人名称
+                type: string
+            Url:
+                description: 机器人webhoook地址
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateFeishuConfigRequest:
+        description: UpdateFeishuConfigRequest 更新飞书远程配置的请求数据结构
+        properties:
+            Url:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateFeishuConfigResponse:
+        description: UpdateFeishuConfigResponse 更新飞书远程配置的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateMailboxConfigRequest:
+        description: UpdateMailboxConfigRequest 更新邮箱远程配置的请求数据结构
+        properties:
+            DisplayName:
+                type: string
+            Password:
+                type: string
+            Port:
+                format: int64
+                type: integer
+            SSL:
+                type: boolean
+            SmtpServer:
+                type: string
+                x-go-name: SMTPServer
+            Template:
+                type: string
+            Username:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateMailboxConfigResponse:
+        description: UpdateMailboxConfigResponse 更新邮箱远程配置的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdatePolicyRequest:
+        description: UpdatePolicyRequest 更新告警策略的请求数据结构
+        properties:
+            Comment:
+                description: 策略描述
+                type: string
+            CreatedAt:
+                format: int64
+                type: integer
+            Creator:
+                description: 告警策略的创建人
+                type: string
+            FormPolicy:
+                $ref: '#/definitions/FormPolicy'
+            Id:
+                format: int64
+                type: integer
+            InstanceId:
+                description: 实例id
+                type: string
+            Labels:
+                additionalProperties:
+                    type: string
+                description: 策略标签
+                type: object
+            Limit:
+                description: 每条告警规则的最大告警次数
+                format: int64
+                type: integer
+            Name:
+                description: 告警策略名称
+                type: string
+            NotifySetup:
+                $ref: '#/definitions/NotifySetup'
+            Production:
+                description: 业务线名称
+                type: string
+            PromqlPolicy:
+                $ref: '#/definitions/PromqlPolicy'
+            Receivers:
+                $ref: '#/definitions/Receivers'
+            Type:
+                $ref: '#/definitions/AlarmPolicyType'
+            UpdatedAt:
+                format: int64
+                type: integer
+            Updater:
+                description: 告警策略的最后修改人
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdatePolicyResponse:
+        description: UpdatePolicyResponse 更新告警策略的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateSMSConfigRequest:
+        description: UpdateSMSConfigRequest 更新短信远程配置的请求数据结构
+        properties:
+            AK:
+                type: string
+            Ip:
+                type: string
+                x-go-name: IP
+            Protocol:
+                type: string
+            SK:
+                type: string
+            Sign:
+                type: string
+            Template:
+                type: string
+            Url:
+                type: string
+                x-go-name: URL
+            User:
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateSMSConfigResponse:
+        description: UpdateSMSConfigResponse 更新短信远程配置的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateWechatConfigRequest:
+        description: UpdateWechatConfigRequest 更新企业微信远程配置的请求数据结构
+        properties:
+            AppId:
+                type: string
+            AppSecret:
+                type: string
+            CompanyId:
+                type: string
+            Template:
+                type: string
+            ToParty:
+                items:
+                    type: string
+                type: array
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    UpdateWechatConfigResponse:
+        description: UpdateWechatConfigResponse 更新企业微信远程配置的响应数据结构
+        properties:
+            Code:
+                description: 响应码，0表示请求成功
+                example: 0
+                format: int64
+                type: integer
+            Data:
+                type: object
+            Message:
+                example: 成功
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+    User:
+        properties:
+            CreatedAt:
+                description: 加入用户组的时间
+                format: int64
+                type: integer
+            Email:
+                description: 用户邮箱
+                type: string
+            Telephone:
+                description: 用户电话
+                type: string
+            UserId:
+                description: 用户id
+                type: string
+            Username:
+                description: 用户名称
+                type: string
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/contacts/dto
+    Value:
+        properties:
+            Key:
+                description: 英文名称
+                type: string
+            Name:
+                description: 中文名称
+                type: string
+            Value:
+                description: 告警数量
+                format: int64
+                type: integer
+        type: object
+        x-go-package: ezone.xxxxx.com/xxxxx/xxxxx/alarm/modules/alarm/v2/dto
+host: xxxxx.swagger.galaxy.cloud
+info:
+    description: 告警策略
+    title: 告警策略
+    version: 1.0.0
+paths:
+    /alarm/v2/alert/list:
+        post:
+            description: 获取告警列表
+            operationId: listAlertRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/ListAlertsRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/listAlertResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取告警列表
+            tags:
+                - alert
+    /alarm/v2/alert/overview:
+        post:
+            description: 告警总览
+            operationId: alertOverviewRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/OverviewRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/alertOverviewResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 告警总览
+            tags:
+                - alert
+    /alarm/v2/policy/create:
+        post:
+            description: 创建告警策略
+            operationId: createPolicyRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/CreatePolicyRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/createPolicyResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 创建告警策略
+            tags:
+                - policy
+    /alarm/v2/policy/delete:
+        post:
+            description: 删除告警策略
+            operationId: deletePolicyRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/DeletePolicyRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/deletePolicyResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 删除告警策略
+            tags:
+                - policy
+    /alarm/v2/policy/describe:
+        get:
+            description: 获取告警策略详情
+            operationId: getPolicyRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - format: int64
+                  in: query
+                  name: InstanceId
+                  type: integer
+            responses:
+                "200":
+                    $ref: '#/responses/getPolicyResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取告警策略详情
+            tags:
+                - policy
+    /alarm/v2/policy/list:
+        post:
+            description: 获取告警策略列表
+            operationId: listPolicyRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/ListPolicyRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/listPolicyResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取告警策略列表
+            tags:
+                - policy
+    /alarm/v2/policy/switch:
+        post:
+            description: 启动或停止告警策略
+            operationId: switchPolicyRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/SwitchPolicyRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/switchPolicyResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 启动或停止告警策略
+            tags:
+                - policy
+    /alarm/v2/policy/update:
+        post:
+            description: 编辑更新告警策略
+            operationId: updatePolicyRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/UpdatePolicyRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/updatePolicyResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 编辑更新告警策略
+            tags:
+                - policy
+    /alarm/v2/promql/list:
+        get:
+            description: 获取PromQL模板
+            operationId: listPromqlTplRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: query
+                  name: resource_sub_type
+                  type: string
+                  x-go-name: ResourceSubType
+            responses:
+                "200":
+                    $ref: '#/responses/listPromqlTplResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取PromQL模板
+            tags:
+                - promql
+    /alarm/v2/remoteconfig/dingtalk/create:
+        post:
+            description: 创建钉钉配置
+            operationId: createDingtalkConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/CreateDingtalkConfigRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/createDingtalkConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 创建钉钉配置
+            tags:
+                - remote_config
+    /alarm/v2/remoteconfig/dingtalk/delete:
+        post:
+            description: 删除钉钉配置
+            operationId: deleteDingtalkConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/DeleteDingtalkConfigRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/deleteDingtalkConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 删除钉钉配置
+            tags:
+                - remote_config
+    /alarm/v2/remoteconfig/dingtalk/list:
+        post:
+            description: 获取钉钉配置列表
+            operationId: listDingtalkConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/ListDingtalkConfigRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/listDingtalkConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取钉钉配置列表
+            tags:
+                - remote_config
+    /alarm/v2/remoteconfig/dingtalk/update:
+        post:
+            description: 更新钉钉配置
+            operationId: updateDingtalkConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/UpdateDingtalkConfigRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/updateDingtalkConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 更新钉钉配置
+            tags:
+                - remote_config
+    /alarm/v2/remoteconfig/feishu:
+        get:
+            description: 获取飞书配置
+            operationId: getFeishuConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+            responses:
+                "200":
+                    $ref: '#/responses/getFeishuConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取飞书配置
+            tags:
+                - remote_config
+        post:
+            description: 更新飞书配置
+            operationId: updateFeishuConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/UpdateFeishuConfigRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/updateFeishuConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 更新飞书配置
+            tags:
+                - remote_config
+    /alarm/v2/remoteconfig/mailbox:
+        get:
+            description: 获取邮箱配置
+            operationId: getMailboxConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+            responses:
+                "200":
+                    $ref: '#/responses/getMailboxConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取邮箱配置
+            tags:
+                - remote_config
+        post:
+            description: 更新邮箱配置
+            operationId: updateMailboxConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/UpdateMailboxConfigRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/updateMailboxConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 更新邮箱配置
+            tags:
+                - remote_config
+    /alarm/v2/remoteconfig/sms:
+        get:
+            description: 获取短信配置
+            operationId: getSMSConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+            responses:
+                "200":
+                    $ref: '#/responses/getSMSConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取短信配置
+            tags:
+                - remote_config
+        post:
+            description: 更新短信配置
+            operationId: updateSMSConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/UpdateSMSConfigRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/updateSMSConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 更新短信配置
+            tags:
+                - remote_config
+    /alarm/v2/remoteconfig/wechat:
+        get:
+            description: 获取企业微信配置
+            operationId: getWechatConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+            responses:
+                "200":
+                    $ref: '#/responses/getWechatConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取企业微信配置
+            tags:
+                - remote_config
+        post:
+            description: 更新企业微信配置
+            operationId: updateWechatConfigRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/UpdateWechatConfigRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/updateWechatConfigResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 更新企业微信配置
+            tags:
+                - remote_config
+    /contact/create:
+        post:
+            description: 创建联系人组
+            operationId: createContactRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/CreateContactRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/createContactResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 创建联系人组
+            tags:
+                - contact
+    /contact/delete:
+        post:
+            description: 删除联系人组
+            operationId: deleteContactRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/DeleteContactRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/deleteContactResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 删除联系人组
+            tags:
+                - contact
+    /contact/list:
+        post:
+            description: 获取联系人组列表
+            operationId: listContactRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/ListContactRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/listContactResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 获取联系人组列表
+            tags:
+                - contact
+    /contact/remove:
+        post:
+            description: 从联系人组中移除用户
+            operationId: removeUserFromContactRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/RemoveUserFromContactRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/removeUserFromContactResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 从联系人组中移除用户
+            tags:
+                - contact
+    /contact/update:
+        post:
+            description: 编辑联系人组，同时更新联系人组中的联系人信息
+            operationId: updateContactRequest
+            parameters:
+                - in: query
+                  name: Action
+                  type: string
+                - in: body
+                  name: Body
+                  schema:
+                    $ref: '#/definitions/UpdateContactRequest'
+            responses:
+                "200":
+                    $ref: '#/responses/updateContactResponse'
+                default:
+                    $ref: '#/responses/errResponse'
+            summary: 编辑联系人组
+            tags:
+                - contact
+produces:
+    - application/json
+responses:
+    alertOverviewResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/OverviewResponse'
+    createContactResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/CreateContactResponse'
+    createDingtalkConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/CreateDingTalkConfigResponse'
+    createPolicyResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/CreatePolicyResponse'
+    deleteContactResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/DeleteContactResponse'
+    deleteDingtalkConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/DeleteDingTalkConfigResponse'
+    deletePolicyResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/DeletePolicyResponse'
+    errResponse:
+        description: 发生错误时的返回信息
+        schema:
+            $ref: '#/definitions/ErrResponse'
+    getFeishuConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/GetFeishuConfigResponse'
+    getMailboxConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/GetMailboxConfigResponse'
+    getPolicyResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/GetPolicyResponse'
+    getSMSConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/GetSMSConfigResponse'
+    getWechatConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/GetWechatConfigResponse'
+    listAlertResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/ListAlertsResponse'
+    listContactResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/ListContactResponse'
+    listDingtalkConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/ListDingTalkConfigResponse'
+    listPolicyResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/ListPolicyResponse'
+    listPromqlTplResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/ListPromqlTplResponse'
+    removeUserFromContactResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/RemoveUserFromContactResponse'
+    switchPolicyResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/SwitchPolicyResponse'
+    updateContactResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/UpdateContactResponse'
+    updateDingtalkConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/UpdateDingTalkConfigResponse'
+    updateFeishuConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/UpdateFeishuConfigResponse'
+    updateMailboxConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/UpdateMailboxConfigResponse'
+    updatePolicyResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/UpdatePolicyResponse'
+    updateSMSConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/UpdateSMSConfigResponse'
+    updateWechatConfigResponse:
+        description: ""
+        schema:
+            $ref: '#/definitions/UpdateWechatConfigResponse'
+schemes:
+    - http
+security:
+    - api_key: []
+securityDefinitions:
+    api_key:
+        in: header
+        name: api_key
+        type: apiKey
+    basic:
+        type: basic
+swagger: "2.0"

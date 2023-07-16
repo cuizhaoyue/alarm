@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alarmv2-config
+  namespace: xxxxx
+data:
+  base.yaml: |
+    base:
+      debug_mode: release
+      time_location: Asia/Shanghai
+    log:
+      #日志打印最低级别
+      log_level: info
+      #文件写入配置
+      file_writer:
+        on: false
+        log_path: ./logs/common.inf.log
+        rotate_log_path: ./logs/common.inf.log
+        wf_log_path: ./logs/common.wf.log
+        rotate_wf_log_path: ./logs/common.wf.log
+      #工作台输出
+      console_writer:
+        on: true
+        color: true
+  mysql.yaml: |
+    list:
+      default:
+        driver_name: mysql
+        data_source_name: xxxxx:xxxxxxxx123@tcp(10.177.40.250:9306)/alert?charset=utf8mb4&parseTime=true
+        max_open_conn:  200
+        max_idle_conn:  100
+        max_conn_life_time: 5000
+      pro:
+        driver_name: mysql
+        data_source_name: xxxxx:xxxxxxxx123@tcp(mysql-cluster-mysql-master.mysql:3306)/alert?charset=utf8mb4&parseTime=true
+        max_open_conn:  20
+        max_idle_conn:  10
+        max_conn_life_time: 500
+  redis.yaml: |
+    list:
+      default:
+        proxy_list: 127.0.0.1:6379
+        password: ""
+        db: 0
+        conn_timeout: 50
+        read_timeout: 100
+        write_timeout:  100
+      pro:
+        proxy_list: 127.0.0.1:6379
+        password: ""
+        db: 0
+        conn_timeout: 50
+        read_timeout: 100
+        write_timeout: 100
